@@ -1,18 +1,12 @@
 #!/bin/sh
 
 #############################
-# Ubuntu Linux Installation #
+# Linux Installation #
 #############################
 
 # Define the root directory to /home/container.
 # We can only write in /home/container and /tmp in the container.
 ROOTFS_DIR=/home/container
-
-# Define the Ubuntu Linux version we are going to be using.
-UBUNTU_VERSION="20.04"
-UBUNTU_FULL_VERSION="20.04.5"
-APK_TOOLS_VERSION="2.14.0-r2" # Make sure to update this too when updating Ubuntu Linux.
-PROOT_VERSION="5.3.0" # Some releases do not have static builds attached.
 
 # Detect the machine architecture.
 ARCH=$(uname -m)
@@ -28,14 +22,57 @@ else
   exit 1
 fi
 
-# Download & decompress the Ubuntu linux root file system if not already installed.
+# Download & decompress the Linux root file system if not already installed.
+
 if [ ! -e $ROOTFS_DIR/.installed ]; then
-    # Download Ubuntu Linux root file system.
+echo "#######################################################################################"
+echo "#"
+echo "#                                  VPSFREE.ES PteroVM"
+echo "#"
+echo "#                           Copyright (C) 2022 - 2023, VPSFREE.ES"
+echo "#"
+echo "#"
+echo "#######################################################################################"
+echo ""
+echo "* [0] Debian"
+echo "* [1] Ubuntu"
+echo "* [2] Alpine"
+echo "* [3] Void"
+echo "* [4] Fedora"
+echo "* [5] Opensuse"
+
+case $input in
+
+    0)
     wget --no-hsts -O /tmp/rootfs.tar.gz \
-    "http://cdimage.ubuntu.com/ubuntu-base/releases/${UBUNTU_VERSION}/release/ubuntu-base-${UBUNTU_FULL_VERSION}-base-${ARCH_ALT}.tar.gz"
-    # Extract the Ubuntu Linux root file system.
-    tar -xzf /tmp/rootfs.tar.gz -C $ROOTFS_DIR
+    "https://github.com/termux/proot-distro/releases/download/v3.12.1/debian-${ARCH}-pd-v3.12.1.tar.xz";
+
+    1)
+    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    "https://github.com/termux/proot-distro/releases/download/v3.10.0/ubuntu-${ARCH}-pd-v3.10.0.tar.xz";
+
+    2)
+    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    "https://github.com/termux/proot-distro/releases/download/v3.10.0/alpine-${ARCH}-pd-v3.10.0.tar.xz";
+
+    3)
+    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    "https://github.com/termux/proot-distro/releases/download/v3.5.1/void-${ARCH}-pd-v3.5.1.tar.xz";
+    
+    4)
+    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    "https://github.com/termux/proot-distro/releases/download/v3.5.1/fedora-${ARCH}-pd-v3.5.1.tar.xz";
+
+    5)
+    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    "https://github.com/termux/proot-distro/releases/download/v3.5.1/opensuse-x86_64-pd-v3.5.1.tar.xz";
+
+tar -xzf /tmp/rootfs.tar.gz -C $ROOTFS_DIR
 fi
+
+PROOT_VERSION="5.3.0" # Some releases do not have static builds attached.
+
+
 
 ################################
 # Package Installation & Setup #
@@ -62,19 +99,16 @@ fi
 # Print some useful information to the terminal before entering PRoot.
 # This is to introduce the user with the various Alpine Linux commands.
 clear && cat << EOF
-
-Hello there!
-
-Here's some commands you might be interested in running
-after installing the vps:
-
-apt update && apt install dropbear curl dialog -y && echo "export PATH=$PATH:/usr/sbin" >> .bashrc
-
-^^
-allows you to install a ssh server and other important stuff
-(keep on mind you should edit /etc/default/dropbear to change the port of the ssh)
-
-Kind regards, Dxomg
+Powered by
+ __      __        ______             
+ \ \    / /       |  ____|            
+  \ \  / / __  ___| |__ _ __ ___  ___ 
+   \ \/ / '_ \/ __|  __| '__/ _ \/ _ \
+    \  /| |_) \__ \ |  | | |  __/  __/
+     \/ | .__/|___/_|  |_|  \___|\___|
+        | |                           
+        |_|                           
+______________________________________
 EOF
 
 ###########################
