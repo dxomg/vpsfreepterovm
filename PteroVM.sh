@@ -48,31 +48,31 @@ read -p "Enter OS (0-7): " input
 case $input in
 
     0)
-    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    wget --no-hsts -O /tmp/rootfs.tar.xz \
     "https://github.com/termux/proot-distro/releases/download/v3.12.1/debian-${ARCH}-pd-v3.12.1.tar.xz";;
 
     1)
-    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    wget --no-hsts -O /tmp/rootfs.tar.xz \
     "https://github.com/termux/proot-distro/releases/download/v3.10.0/ubuntu-${ARCH}-pd-v3.10.0.tar.xz";;
 
     2)
-    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    wget --no-hsts -O /tmp/rootfs.tar.xz \
     "https://github.com/termux/proot-distro/releases/download/v3.10.0/alpine-${ARCH}-pd-v3.10.0.tar.xz";;
 
     3)
-    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    wget --no-hsts -O /tmp/rootfs.tar.xz \
     "https://github.com/termux/proot-distro/releases/download/v3.5.1/void-${ARCH}-pd-v3.5.1.tar.xz";;
     
     4)
-    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    wget --no-hsts -O /tmp/rootfs.tar.xz \
     "https://github.com/termux/proot-distro/releases/download/v3.5.1/fedora-${ARCH}-pd-v3.5.1.tar.xz";;
 
     5)
-    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    wget --no-hsts -O /tmp/rootfs.tar.xz \
     "https://github.com/termux/proot-distro/releases/download/v3.5.1/opensuse-${ARCH}-v3.5.1.tar.xz";;
 esac
 
-tar -xzf /tmp/rootfs.tar.gz -C $ROOTFS_DIR
+tar -xzf /tmp/rootfs.tar.xz -C $ROOTFS_DIR
 fi
 
 ################################
@@ -93,7 +93,7 @@ if [ ! -e $ROOTFS_DIR/.installed ]; then
     # Add DNS Resolver nameservers to resolv.conf.
     printf "nameserver 1.1.1.1\nnameserver 1.0.0.1" > ${ROOTFS_DIR}/etc/resolv.conf
     # Wipe the files we downloaded into /tmp previously.
-    rm -rf /tmp/rootfs.tar.gz /tmp/sbin
+    rm -rf /tmp/rootfs.tar.xz /tmp/sbin
     # Create .installed to later check whether Alpine is installed.
     touch $ROOTFS_DIR/.installed
 fi
