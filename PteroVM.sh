@@ -45,7 +45,7 @@ case $input in
 
     0)
     wget --no-hsts -O /tmp/rootfs.tar.gz \
-    "https://github.com/termux/proot-distro/releases/download/v3.12.1/debian-${ARCH}-pd-v3.12.1.tar.xz";
+    "https://github.com/termux/proot-distro/releases/download/v3.12.1/debian-${ARCH}-pd-v3.12.1.tar.xz";;
 
     1)
     wget --no-hsts -O /tmp/rootfs.tar.gz \
@@ -53,19 +53,19 @@ case $input in
 
     2)
     wget --no-hsts -O /tmp/rootfs.tar.gz \
-    "https://github.com/termux/proot-distro/releases/download/v3.10.0/alpine-${ARCH}-pd-v3.10.0.tar.xz";
+    "https://github.com/termux/proot-distro/releases/download/v3.10.0/alpine-${ARCH}-pd-v3.10.0.tar.xz";;
 
     3)
     wget --no-hsts -O /tmp/rootfs.tar.gz \
-    "https://github.com/termux/proot-distro/releases/download/v3.5.1/void-${ARCH}-pd-v3.5.1.tar.xz";
+    "https://github.com/termux/proot-distro/releases/download/v3.5.1/void-${ARCH}-pd-v3.5.1.tar.xz";;
     
     4)
     wget --no-hsts -O /tmp/rootfs.tar.gz \
-    "https://github.com/termux/proot-distro/releases/download/v3.5.1/fedora-${ARCH}-pd-v3.5.1.tar.xz";
+    "https://github.com/termux/proot-distro/releases/download/v3.5.1/fedora-${ARCH}-pd-v3.5.1.tar.xz";;
 
     5)
     wget --no-hsts -O /tmp/rootfs.tar.gz \
-    "https://github.com/termux/proot-distro/releases/download/v3.5.1/opensuse-x86_64-pd-v3.5.1.tar.xz";
+    "https://github.com/termux/proot-distro/releases/download/v3.5.1/opensuse-x86_64-pd-v3.5.1.tar.xz";;
 
 tar -xzf /tmp/rootfs.tar.gz -C $ROOTFS_DIR
 fi
