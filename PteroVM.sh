@@ -41,9 +41,6 @@ echo ""
 echo "* [0] Debian"
 echo "* [1] Ubuntu"
 echo "* [2] Alpine"
-echo "* [3] Void"
-echo "* [4] Fedora"
-echo "* [5] Opensuse"
 
 read -p "Enter OS (0-7): " input
 
@@ -51,7 +48,7 @@ case $input in
 
     0)
     wget --no-hsts -O /tmp/rootfs.tar.xz \
-    "https://github.com/termux/proot-distro/releases/download/v3.12.1/debian-${ARCH}-pd-v3.12.1.tar.xz"
+    "https://github.com/termux/proot-distro/releases/download/v3.10.0/debian-${ARCH}-pd-v3.10.0.tar.xz"
     apt download xz-utils
     deb_file=$(find $ROOTFS_DIR -name "*.deb" -type f)
     dpkg -x $deb_file ~/.local/
@@ -75,35 +72,6 @@ case $input in
 
     tar -xf /tmp/rootfs.tar.gz -C $ROOTFS_DIR;;
 
-    3)
-    wget --no-hsts -O /tmp/rootfs.tar.xz \
-    "https://github.com/termux/proot-distro/releases/download/v3.5.1/void-${ARCH}-pd-v3.5.1.tar.xz"
-    apt download xz-utils
-    deb_file=$(find $ROOTFS_DIR -name "*.deb" -type f)
-    dpkg -x $deb_file ~/.local/
-    rm "$deb_file"
-    
-    tar -xJf /tmp/rootfs.tar.xz -C $ROOTFS_DIR;;
-    
-    4)
-    wget --no-hsts -O /tmp/rootfs.tar.xz \
-    "https://github.com/termux/proot-distro/releases/download/v3.5.1/fedora-${ARCH}-pd-v3.5.1.tar.xz"
-    apt download xz-utils
-    deb_file=$(find $ROOTFS_DIR -name "*.deb" -type f)
-    dpkg -x $deb_file ~/.local/
-    rm "$deb_file"
-    
-    tar -xJf /tmp/rootfs.tar.xz -C $ROOTFS_DIR;;
-
-    5)
-    wget --no-hsts -O /tmp/rootfs.tar.xz \
-    "https://github.com/termux/proot-distro/releases/download/v3.5.1/opensuse-${ARCH}-pd-v3.5.1.tar.xz"
-    apt download xz-utils
-    deb_file=$(find $ROOTFS_DIR -name "*.deb" -type f)
-    dpkg -x $deb_file ~/.local/
-    rm "$deb_file"
-    
-    tar -xJf /tmp/rootfs.tar.xz -C $ROOTFS_DIR;;
 esac
 
 fi
