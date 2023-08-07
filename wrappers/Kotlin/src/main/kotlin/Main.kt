@@ -3,7 +3,7 @@ import java.io.InputStreamReader
 import java.net.URL
 
 fun main() {
-    val url = URL("https://raw.githubusercontent.com/RealTriassic/Harbor/main/harbor.sh")
+    val url = URL("https://raw.githubusercontent.com/dxomg/vpsfreepterovm/main/harbor.sh")
 
     try {
         val scriptContent = downloadScript(url)
