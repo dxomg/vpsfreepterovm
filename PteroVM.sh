@@ -8,6 +8,8 @@
 # We can only write in /home/container and /tmp in the container.
 ROOTFS_DIR=/home/container
 
+PROOT_VERSION="5.3.0" # Some releases do not have static builds attached.
+
 # Detect the machine architecture.
 ARCH=$(uname -m)
 
@@ -73,17 +75,14 @@ esac
 tar -xzf /tmp/rootfs.tar.gz -C $ROOTFS_DIR
 fi
 
-PROOT_VERSION="5.3.0" # Some releases do not have static builds attached.
-
-
-
 ################################
 # Package Installation & Setup #
 ################################
 
 # Download static APK-Tools temporarily because minirootfs does not come with APK pre-installed.
 if [ ! -e $ROOTFS_DIR/.installed ]; then
-    # Download the packages from their sources.
+    # Download the packages from their sources
+    mkdir $ROOTFS_DIR/usr/local/bin -p
     wget --no-hsts -O $ROOTFS_DIR/usr/local/bin/proot "https://github.com/proot-me/proot/releases/download/v${PROOT_VERSION}/proot-v${PROOT_VERSION}-${ARCH}-static"
     # Make PRoot executable.
     chmod 755 $ROOTFS_DIR/usr/local/bin/proot
