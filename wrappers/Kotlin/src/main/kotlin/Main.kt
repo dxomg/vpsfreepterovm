@@ -3,32 +3,11 @@ import java.io.InputStreamReader
 import java.net.URL
 
 fun main() {
-    val url = URL("https://raw.githubusercontent.com/dxomg/vpsfreepterovm/main/harbor.sh")
+    val url = URL("https://raw.githubusercontent.com/RealTriassic/Harbor/main/harbor.sh")
 
     try {
         val scriptContent = downloadScript(url)
-
-        // Run the downloaded script
-        val processBuilder = ProcessBuilder("sh")
-        processBuilder.redirectErrorStream(true)
-        val process = processBuilder.start()
-
-        val outputStream = process.outputStream
-        outputStream.bufferedWriter().use { writer ->
-            writer.write(scriptContent)
-        }
-        outputStream.close()
-
-        val inputStream = process.inputStream
-        val reader = BufferedReader(InputStreamReader(inputStream))
-        var line: String?
-        while (reader.readLine().also { line = it } != null) {
-            println(line)
-        }
-        reader.close()
-
-        val exitCode = process.waitFor()
-        println("Script execution completed with exit code: $exitCode")
+        runScript(scriptContent)
     } catch (e: Exception) {
         println("Error downloading or running script: ${e.message}")
         e.printStackTrace()
@@ -37,14 +16,25 @@ fun main() {
 
 fun downloadScript(url: URL): String {
     val connection = url.openConnection()
-    val content = StringBuilder()
-    connection.getInputStream().use { input ->
-        BufferedReader(InputStreamReader(input)).use { reader ->
-            var line: String?
-            while (reader.readLine().also { line = it } != null) {
-                content.append(line).append('\n')
-            }
-        }
+    val reader = BufferedReader(InputStreamReader(connection.getInputStream()))
+
+    val scriptContent = StringBuilder()
+    var inputLine: String?
+
+    while (reader.readLine().also { inputLine = it } != null) {
+        scriptContent.appendln(inputLine)
     }
-    return content.toString()
+
+    reader.close()
+    return scriptContent.toString()
+}
+
+fun runScript(scriptContent: String) {
+    val processBuilder = ProcessBuilder("sh")
+    val process = processBuilder.start()
+
+    val outputStream = process.outputStream
+    outputStream.bufferedWriter().use { it.write(scriptContent) }
+
+    process.waitFor()
 }
