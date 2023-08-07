@@ -41,6 +41,8 @@ echo "* [3] Void"
 echo "* [4] Fedora"
 echo "* [5] Opensuse"
 
+read -p "Enter OS (0-7): " input
+
 case $input in
 
     0)
