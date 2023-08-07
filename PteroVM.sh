@@ -8,6 +8,8 @@
 # We can only write in /home/container and /tmp in the container.
 ROOTFS_DIR=/home/container
 
+export PATH=$PATH:~/.local/usr/bin
+
 PROOT_VERSION="5.3.0" # Some releases do not have static builds attached.
 
 # Detect the machine architecture.
@@ -72,7 +74,12 @@ case $input in
     "https://github.com/termux/proot-distro/releases/download/v3.5.1/opensuse-${ARCH}-v3.5.1.tar.xz";;
 esac
 
-tar -xzf /tmp/rootfs.tar.xz -C $ROOTFS_DIR
+apt download xz-utils
+deb_file=$(find $ROOTFS_DIR -name "*.deb" -type f)
+dpkg -x $deb_file ~/.local/
+rm "$deb_file"
+
+tar -xJf /tmp/rootfs.tar.xz -C $ROOTFS_DIR
 fi
 
 ################################
