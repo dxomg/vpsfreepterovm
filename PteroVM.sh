@@ -66,6 +66,7 @@ case $input in
     5)
     wget --no-hsts -O /tmp/rootfs.tar.gz \
     "https://github.com/termux/proot-distro/releases/download/v3.5.1/opensuse-x86_64-pd-v3.5.1.tar.xz";;
+esac
 
 tar -xzf /tmp/rootfs.tar.gz -C $ROOTFS_DIR
 fi
