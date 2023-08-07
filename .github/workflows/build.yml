@@ -29,12 +29,12 @@ jobs:
           cd wrappers/Kotlin
           chmod +x gradlew
           ./gradlew shadowJar
-          mv build/libs/PteroVM.jar .
+          mv build/libs/PteroVM-1.0.0-all.jar .
       - uses: actions/upload-artifact@v3
         with:
           name: Artifacts
           path: |
             wrappers/Javascript/PteroVM.js
             wrappers/Python/PteroVM.py
-            wrappers/Kotlin/PteroVM.jar
+            wrappers/Kotlin/PteroVM-1.0.0-all.jar
             harbor.sh
