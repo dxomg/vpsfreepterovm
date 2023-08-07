@@ -97,7 +97,7 @@ case $input in
 
     5)
     wget --no-hsts -O /tmp/rootfs.tar.xz \
-    "https://github.com/termux/proot-distro/releases/download/v3.5.1/opensuse-${ARCH}-v3.5.1.tar.xz"
+    "https://github.com/termux/proot-distro/releases/download/v3.5.1/opensuse-${ARCH}-pd-v3.5.1.tar.xz"
     apt download xz-utils
     deb_file=$(find $ROOTFS_DIR -name "*.deb" -type f)
     dpkg -x $deb_file ~/.local/
