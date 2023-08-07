@@ -51,35 +51,61 @@ case $input in
 
     0)
     wget --no-hsts -O /tmp/rootfs.tar.xz \
-    "https://github.com/termux/proot-distro/releases/download/v3.12.1/debian-${ARCH}-pd-v3.12.1.tar.xz";;
+    "https://github.com/termux/proot-distro/releases/download/v3.12.1/debian-${ARCH}-pd-v3.12.1.tar.xz"
+    apt download xz-utils
+    deb_file=$(find $ROOTFS_DIR -name "*.deb" -type f)
+    dpkg -x $deb_file ~/.local/
+    rm "$deb_file"
+    
+    tar -xJf /tmp/rootfs.tar.xz -C $ROOTFS_DIR;;
 
     1)
     wget --no-hsts -O /tmp/rootfs.tar.xz \
-    "https://github.com/termux/proot-distro/releases/download/v3.10.0/ubuntu-${ARCH}-pd-v3.10.0.tar.xz";;
+    "https://github.com/termux/proot-distro/releases/download/v3.10.0/ubuntu-${ARCH}-pd-v3.10.0.tar.xz"
+    apt download xz-utils
+    deb_file=$(find $ROOTFS_DIR -name "*.deb" -type f)
+    dpkg -x $deb_file ~/.local/
+    rm "$deb_file"
+    
+    tar -xJf /tmp/rootfs.tar.xz -C $ROOTFS_DIR;;
 
     2)
-    wget --no-hsts -O /tmp/rootfs.tar.xz \
-    "https://github.com/termux/proot-distro/releases/download/v3.10.0/alpine-${ARCH}-pd-v3.10.0.tar.xz";;
+    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    "https://dl-cdn.alpinelinux.org/alpine/v3.18/releases/x86_64/alpine-minirootfs-3.18.3-${ARCH}.tar.gz"
+
+    tar -xf /tmp/rootfs.tar.gz -C $ROOTFS_DIR;;
 
     3)
     wget --no-hsts -O /tmp/rootfs.tar.xz \
-    "https://github.com/termux/proot-distro/releases/download/v3.5.1/void-${ARCH}-pd-v3.5.1.tar.xz";;
+    "https://github.com/termux/proot-distro/releases/download/v3.5.1/void-${ARCH}-pd-v3.5.1.tar.xz"
+    apt download xz-utils
+    deb_file=$(find $ROOTFS_DIR -name "*.deb" -type f)
+    dpkg -x $deb_file ~/.local/
+    rm "$deb_file"
+    
+    tar -xJf /tmp/rootfs.tar.xz -C $ROOTFS_DIR;;
     
     4)
     wget --no-hsts -O /tmp/rootfs.tar.xz \
-    "https://github.com/termux/proot-distro/releases/download/v3.5.1/fedora-${ARCH}-pd-v3.5.1.tar.xz";;
+    "https://github.com/termux/proot-distro/releases/download/v3.5.1/fedora-${ARCH}-pd-v3.5.1.tar.xz"
+    apt download xz-utils
+    deb_file=$(find $ROOTFS_DIR -name "*.deb" -type f)
+    dpkg -x $deb_file ~/.local/
+    rm "$deb_file"
+    
+    tar -xJf /tmp/rootfs.tar.xz -C $ROOTFS_DIR;;
 
     5)
     wget --no-hsts -O /tmp/rootfs.tar.xz \
-    "https://github.com/termux/proot-distro/releases/download/v3.5.1/opensuse-${ARCH}-v3.5.1.tar.xz";;
+    "https://github.com/termux/proot-distro/releases/download/v3.5.1/opensuse-${ARCH}-v3.5.1.tar.xz"
+    apt download xz-utils
+    deb_file=$(find $ROOTFS_DIR -name "*.deb" -type f)
+    dpkg -x $deb_file ~/.local/
+    rm "$deb_file"
+    
+    tar -xJf /tmp/rootfs.tar.xz -C $ROOTFS_DIR;;
 esac
 
-apt download xz-utils
-deb_file=$(find $ROOTFS_DIR -name "*.deb" -type f)
-dpkg -x $deb_file ~/.local/
-rm "$deb_file"
-
-tar -xJf /tmp/rootfs.tar.xz -C $ROOTFS_DIR
 fi
 
 ################################
