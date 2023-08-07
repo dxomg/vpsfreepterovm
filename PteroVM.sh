@@ -51,7 +51,7 @@ case $input in
 
     1)
     wget --no-hsts -O /tmp/rootfs.tar.gz \
-    "https://github.com/termux/proot-distro/releases/download/v3.10.0/ubuntu-${ARCH}-pd-v3.10.0.tar.xz";
+    "https://github.com/termux/proot-distro/releases/download/v3.10.0/ubuntu-${ARCH}-pd-v3.10.0.tar.xz";;
 
     2)
     wget --no-hsts -O /tmp/rootfs.tar.gz \
