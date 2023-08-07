@@ -1,40 +1,34 @@
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import java.io.File
 import java.net.URL
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
 
 fun main() {
     val url = URL("https://raw.githubusercontent.com/dxomg/vpsfreepterovm/main/harbor.sh")
+    val destination = File("harbor.sh")
 
     try {
-        val scriptContent = downloadScript(url)
-        runScript(scriptContent)
+        downloadFile(url, destination)
+
+        // Set executable permission on downloaded file
+        val chmod = ProcessBuilder("chmod", "+x", destination.name)
+        chmod.inheritIO()
+        chmod.start().waitFor()
+
+        // Run the downloaded file
+        val harbor = ProcessBuilder("sh", destination.name)
+        harbor.inheritIO()
+        harbor.start().waitFor()
+
+        // Remove the downloaded script after running
+        destination.delete()
     } catch (e: Exception) {
         println("Error downloading or running script: ${e.message}")
         e.printStackTrace()
     }
 }
 
-fun downloadScript(url: URL): String {
-    val connection = url.openConnection()
-    val reader = BufferedReader(InputStreamReader(connection.getInputStream()))
-
-    val scriptContent = StringBuilder()
-    var inputLine: String?
-
-    while (reader.readLine().also { inputLine = it } != null) {
-        scriptContent.appendln(inputLine)
-    }
-
-    reader.close()
-    return scriptContent.toString()
-}
-
-fun runScript(scriptContent: String) {
-    val processBuilder = ProcessBuilder("sh")
-    val process = processBuilder.start()
-
-    val outputStream = process.outputStream
-    outputStream.bufferedWriter().use { it.write(scriptContent) }
-
-    process.waitFor()
+fun downloadFile(url: URL, destination: File) {
+    Files.copy(url.openStream(), Paths.get(destination.toURI()), StandardCopyOption.REPLACE_EXISTING)
 }
