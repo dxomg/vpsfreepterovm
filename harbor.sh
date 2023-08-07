@@ -75,7 +75,7 @@ allows you to install a ssh server and other important stuff
 (keep on mind you should edit /etc/default/dropbear to change the port of the ssh)
 
 Kind regards, Dxomg
-#EOF
+EOF
 
 ###########################
 # Start PRoot environment #
