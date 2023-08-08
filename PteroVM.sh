@@ -57,14 +57,10 @@ case $input in
     tar -xJf /tmp/rootfs.tar.xz -C $ROOTFS_DIR;;
 
     1)
-    wget --no-hsts -O /tmp/rootfs.tar.xz \
-    "https://github.com/termux/proot-distro/releases/download/v3.10.0/ubuntu-${ARCH}-pd-v3.10.0.tar.xz"
-    apt download xz-utils
-    deb_file=$(find $ROOTFS_DIR -name "*.deb" -type f)
-    dpkg -x $deb_file ~/.local/
-    rm "$deb_file"
-    
-    tar -xJf /tmp/rootfs.tar.xz -C $ROOTFS_DIR;;
+    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    "http://cdimage.ubuntu.com/ubuntu-base/releases/20.04/release/ubuntu-base-20.04.4-base-${ARCH_ALT}.tar.gz"
+
+    tar -xf /tmp/rootfs.tar.gz -C $ROOTFS_DIR;;
 
     2)
     wget --no-hsts -O /tmp/rootfs.tar.gz \
