@@ -37,4 +37,4 @@ jobs:
             wrappers/Javascript/PteroVM.js
             wrappers/Python/PteroVM.py
             wrappers/Kotlin/PteroVM-1.0.0-all.jar
-            harbor.sh
+            PteroVM.sh
