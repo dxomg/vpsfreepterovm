@@ -41,8 +41,9 @@ echo ""
 echo "* [0] Debian"
 echo "* [1] Ubuntu"
 echo "* [2] Alpine"
+echo "* [3] ArchLinux (ARM not supported!)"
 
-read -p "Enter OS (0-7): " input
+read -p "Enter OS (0-3): " input
 
 case $input in
 
@@ -65,6 +66,13 @@ case $input in
     2)
     wget --no-hsts -O /tmp/rootfs.tar.gz \
     "https://dl-cdn.alpinelinux.org/alpine/v3.18/releases/x86_64/alpine-minirootfs-3.18.3-${ARCH}.tar.gz"
+
+    tar -xf /tmp/rootfs.tar.gz -C $ROOTFS_DIR;;
+
+    3)
+    wget --no-hsts -O /tmp/rootfs.tar.gz \
+    "https://dl-cdn.alpinelinux.org/alpine/v3.18/releases/x86_64/alpine-minirootfs-3.18.3-${ARCH}.tar.gz"
+    "https://archive.archlinux.org/iso/2023.08.01/archlinux-bootstrap-${ARCH}.tar.gz"
 
     tar -xf /tmp/rootfs.tar.gz -C $ROOTFS_DIR;;
 
