@@ -41,7 +41,6 @@ echo ""
 echo "* [0] Debian"
 echo "* [1] Ubuntu"
 echo "* [2] Alpine"
-echo "* [3] ArchLinux (ARM not supported!)"
 
 read -p "Enter OS (0-3): " input
 
@@ -69,11 +68,6 @@ case $input in
 
     tar -xf /tmp/rootfs.tar.gz -C $ROOTFS_DIR;;
 
-    3)
-    wget --no-hsts -O /tmp/rootfs.tar.gz \
-    "https://archive.archlinux.org/iso/2023.08.01/archlinux-bootstrap-${ARCH}.tar.gz"
-
-    tar -xf /tmp/rootfs.tar.gz -C $ROOTFS_DIR;;
 
 esac
 
