@@ -119,3 +119,8 @@ EOF
 $ROOTFS_DIR/usr/local/bin/proot \
 --rootfs="${ROOTFS_DIR}" \
 -0 -w "/root" -b /dev -b /sys -b /proc -b /etc/resolv.conf --kill-on-exit
+
+
+echo
+echo "Enter password for your VM"
+psswd
