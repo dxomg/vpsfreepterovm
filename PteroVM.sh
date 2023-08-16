@@ -115,7 +115,7 @@ EOF
 ###########################
 # Option to set a password
 echo
-echo "Do you want to set a password for your VM? (y/n)"
+echo "Do you want to set a password for your VM? (type y)"
 read choice
 
 if [ "$choice" = "y" ]; then
