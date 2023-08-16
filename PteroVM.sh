@@ -113,7 +113,6 @@ EOF
 ###########################
 # Start PRoot environment #
 ###########################
-
 # Option to set a password
 echo
 echo "Do you want to set a password for your VM? (y/n)"
@@ -123,7 +122,7 @@ if [ "$choice" = "y" ]; then
     if [ ! -e $ROOTFS_DIR/.password_set ]; then
         echo "Enter password for the VM:"
         read vm_password
-        echo "root:$vm_password" | chroot $ROOTFS_DIR chpasswd
+        echo "root:$vm_password" | $ROOTFS_DIR/usr/local/bin/proot --rootfs="$ROOTFS_DIR" -w "/root" -b /dev -b /sys -b /proc -b /etc/resolv.conf chpasswd
         echo "Password set successfully for the root user."
         touch $ROOTFS_DIR/.password_set
     else
