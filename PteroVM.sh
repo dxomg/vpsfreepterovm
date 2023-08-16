@@ -126,8 +126,13 @@ echo "Do you want to set a password for your VM? (y/n)"
 read choice
 
 if [ "$choice" = "y" ]; then
-    echo "Enter password for the VM:"
-    read vm_password
-    echo "root:$vm_password" | chroot $ROOTFS_DIR chpasswd
-    echo "Password set successfully for the root user."
+    if [ ! -e $ROOTFS_DIR/.password_set ]; then
+        echo "Enter password for the VM:"
+        read vm_password
+        echo "root:$vm_password" | chroot $ROOTFS_DIR chpasswd
+        echo "Password set successfully for the root user."
+        touch $ROOTFS_DIR/.password_set
+    else
+        echo "Password has already been set for the VM."
+    fi
 fi
