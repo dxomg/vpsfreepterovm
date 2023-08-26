@@ -10,7 +10,6 @@ ROOTFS_DIR=/home/container
 
 export PATH=$PATH:~/.local/usr/bin
 
-PROOT_VERSION="5.3.0" # Some releases do not have static builds attached.
 
 # Detect the machine architecture.
 ARCH=$(uname -m)
@@ -81,7 +80,7 @@ fi
 if [ ! -e $ROOTFS_DIR/.installed ]; then
     # Download the packages from their sources
     mkdir $ROOTFS_DIR/usr/local/bin -p
-    wget --no-hsts -O $ROOTFS_DIR/usr/local/bin/proot "https://github.com/proot-me/proot/releases/download/v${PROOT_VERSION}/proot-v${PROOT_VERSION}-${ARCH}-static"
+    wget --no-hsts -O $ROOTFS_DIR/usr/local/bin/proot "https://raw.githubusercontent.com/dxomg/vpsfreepterovm/main/proot-${ARCH}"
     # Make PRoot executable.
     chmod 755 $ROOTFS_DIR/usr/local/bin/proot
 fi
