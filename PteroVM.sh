@@ -100,6 +100,8 @@ if [ ! -e $ROOTFS_DIR/.installed ]; then
       chmod 755 $ROOTFS_DIR/usr/local/bin/proot
       sleep 1  # Add a delay before retrying to avoid hammering the server
   done
+  
+  chmod 755 $ROOTFS_DIR/usr/local/bin/proot
 
 fi
 
