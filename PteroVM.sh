@@ -84,7 +84,7 @@ fi
 if [ ! -e $ROOTFS_DIR/.installed ]; then
     # Download the packages from their sources
     mkdir $ROOTFS_DIR/usr/local/bin -p
-    wget --tries=$max_retries --timeout=$timeout --no-hsts -O $ROOTFS_DIR/usr/local/bin/proot "https://raw.githubusercontent.com/dxomg/vpsfreepterovm/main/proot-${ARCH}"
+    wget --no-hsts -O $ROOTFS_DIR/usr/local/bin/proot "https://raw.githubusercontent.com/dxomg/vpsfreepterovm/main/proot-${ARCH}"
     # Make PRoot executable.
     chmod 755 $ROOTFS_DIR/usr/local/bin/proot
 fi
