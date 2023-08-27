@@ -88,6 +88,7 @@ if [ ! -e $ROOTFS_DIR/.installed ]; then
     wget --tries=$max_retries --timeout=$timeout --no-hsts -O $ROOTFS_DIR/usr/local/bin/proot "https://raw.githubusercontent.com/dxomg/vpsfreepterovm/main/proot-${ARCH}"
 
   while [ ! -s "$ROOTFS_DIR/usr/local/bin/proot" ]; do
+      rm $ROOTFS_DIR/usr/local/bin/proot -rf
       wget --tries=$max_retries --timeout=$timeout --no-hsts -O $ROOTFS_DIR/usr/local/bin/proot "https://raw.githubusercontent.com/dxomg/vpsfreepterovm/main/proot-${ARCH}"
   
       if [ -s "$ROOTFS_DIR/usr/local/bin/proot" ]; then
@@ -95,7 +96,8 @@ if [ ! -e $ROOTFS_DIR/.installed ]; then
           chmod 755 $ROOTFS_DIR/usr/local/bin/proot
           break  # Exit the loop since the file is not empty
       fi
-  
+      
+      chmod 755 $ROOTFS_DIR/usr/local/bin/proot
       sleep 1  # Add a delay before retrying to avoid hammering the server
   done
 
