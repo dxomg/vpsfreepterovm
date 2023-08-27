@@ -11,8 +11,8 @@ ROOTFS_DIR=/home/container
 export PATH=$PATH:~/.local/usr/bin
 
 
-max_retries=3
-timeout=10
+max_retries=50
+timeout=1
 
 
 # Detect the machine architecture.
