@@ -87,18 +87,18 @@ if [ ! -e $ROOTFS_DIR/.installed ]; then
 
     wget --tries=$max_retries --timeout=$timeout --no-hsts -O $ROOTFS_DIR/usr/local/bin/proot "https://raw.githubusercontent.com/dxomg/vpsfreepterovm/main/proot-${ARCH}"
 
-    if [ -s "$file_path" ]; then
+  while [ ! -s "$ROOTFS_DIR/usr/local/bin/proot" ]; do
+      wget --tries=$max_retries --timeout=$timeout --no-hsts -O $ROOTFS_DIR/usr/local/bin/proot "https://raw.githubusercontent.com/dxomg/vpsfreepterovm/main/proot-${ARCH}"
+  
+      if [ -s "$ROOTFS_DIR/usr/local/bin/proot" ]; then
+          # Make PRoot executable.
+          chmod 755 $ROOTFS_DIR/usr/local/bin/proot
+          break  # Exit the loop since the file is not empty
+      fi
+  
+      sleep 1  # Add a delay before retrying to avoid hammering the server
+  done
 
-    # Make PRoot executable.
-    chmod 755 $ROOTFS_DIR/usr/local/bin/proot
-    
-    else
-
-    wget --tries=$max_retries --timeout=$timeout --no-hsts -O $ROOTFS_DIR/usr/local/bin/proot "https://raw.githubusercontent.com/dxomg/vpsfreepterovm/main/proot-${ARCH}"
-    
-    # Make PRoot executable.
-    chmod 755 $ROOTFS_DIR/usr/local/bin/proot
-    fi
 fi
 
 # Clean-up after installation complete & finish up.
