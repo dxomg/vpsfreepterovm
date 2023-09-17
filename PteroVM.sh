@@ -117,17 +117,67 @@ fi
 
 # Print some useful information to the terminal before entering PRoot.
 # This is to introduce the user with the various Alpine Linux commands.
-clear && cat << EOF
-Powered by
- _    __           ______             
-| |  / /___  _____/ ____/_______  ___ 
-| | / / __ \/ ___/ /_  / ___/ _ \/ _ \
+# Define color variables
+BLACK='\e[0;30m'
+BOLD_BLACK='\e[1;30m'
+RED='\e[0;31m'
+BOLD_RED='\e[1;31m'
+GREEN='\e[0;32m'
+BOLD_GREEN='\e[1;32m'
+YELLOW='\e[0;33m'
+BOLD_YELLOW='\e[1;33m'
+BLUE='\e[0;34m'
+BOLD_BLUE='\e[1;34m'
+MAGENTA='\e[0;35m'
+BOLD_MAGENTA='\e[1;35m'
+CYAN='\e[0;36m'
+BOLD_CYAN='\e[1;36m'
+WHITE='\e[0;37m'
+BOLD_WHITE='\e[1;37m'
 
-| |/ / /_/ (__  ) __/ / /  /  __/  __/
-|___/ .___/____/_/   /_/   \___/\___/ 
-   /_/                                
-______________________________________
-EOF
+# Reset text color
+RESET_COLOR='\e[0m'
+
+
+# Function to display the header
+display_header() {
+    echo -e "${BOLD_MAGENTA} __      __        ______"
+    echo -e "${BOLD_MAGENTA} \ \    / /       |  ____|"
+    echo -e "${BOLD_MAGENTA}  \ \  / / __  ___| |__ _ __ ___  ___   ___  ___"
+    echo -e "${BOLD_MAGENTA}   \ \/ / '_ \/ __|  __| '__/ _ \/ _ \ / _ \/ __|"
+    echo -e "${BOLD_MAGENTA}    \  /| |_) \__ \ |  | | |  __/  __/|  __/\__ \\"
+    echo -e "${BOLD_MAGENTA}     \/ | .__/|___/_|  |_|  \___|\___(_)___||___/"
+    echo -e "${BOLD_MAGENTA}        | |"
+    echo -e "${BOLD_MAGENTA}        |_|"
+    echo -e "${BOLD_MAGENTA}___________________________________________________"
+    echo -e "           ${YELLOW}-----> System Resources <----${RESET_COLOR}"
+    echo -e ""
+}
+
+# Function to display system resources
+display_resources() {
+	echo -e " INSTALLER OS -> ${RED} $(cat /etc/os-release | grep "PRETTY_NAME" | cut -d'"' -f2) ${RESET_COLOR}"
+	echo -e ""
+    echo -e " CPU -> ${YELLOW} $(lscpu | grep 'Model name' | cut -d':' -f2- | sed 's/^ *//;s/  \+/ /g') ${RESET_COLOR}"
+    echo -e " RAM -> ${BOLD_GREEN}${SERVER_MEMORY}MB${RESET_COLOR}"
+    echo -e " IP -> ${BOLD_GREEN}${SERVER_IP}${RESET_COLOR}"
+    echo -e " PRIMARY PORT -> ${BOLD_GREEN}${SERVER_PORT}${RESET_COLOR}"
+    echo -e " EXTRA PORTS -> ${BOLD_GREEN}${P_SERVER_ALLOCATION_LIMIT}${RESET_COLOR}"
+    echo -e " SERVER UUID -> ${BOLD_GREEN}${P_SERVER_UUID}${RESET_COLOR}"
+    echo -e " LOCATION -> ${BOLD_GREEN}${P_SERVER_LOCATION}${RESET_COLOR}"
+}
+
+display_footer() {
+	echo -e "${BOLD_MAGENTA}___________________________________________________${RESET_COLOR}"
+	echo -e ""
+    echo -e "           ${YELLOW}-----> VPS HAS STARTED <----${RESET_COLOR}"
+}
+
+# Main script execution
+display_header
+display_resources
+display_footer
+
 
 ###########################
 # Start PRoot environment #
