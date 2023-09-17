@@ -160,7 +160,6 @@ display_resources() {
 	echo -e ""
     echo -e " CPU -> ${YELLOW} $(lscpu | grep 'Model name' | cut -d':' -f2- | sed 's/^ *//;s/  \+/ /g') ${RESET_COLOR}"
     echo -e " RAM -> ${BOLD_GREEN}${SERVER_MEMORY}MB${RESET_COLOR}"
-    echo -e " IP -> ${BOLD_GREEN}${SERVER_IP}${RESET_COLOR}"
     echo -e " PRIMARY PORT -> ${BOLD_GREEN}${SERVER_PORT}${RESET_COLOR}"
     echo -e " EXTRA PORTS -> ${BOLD_GREEN}${P_SERVER_ALLOCATION_LIMIT}${RESET_COLOR}"
     echo -e " SERVER UUID -> ${BOLD_GREEN}${P_SERVER_UUID}${RESET_COLOR}"
