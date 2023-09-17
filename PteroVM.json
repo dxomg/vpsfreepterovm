@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-08-08T02:58:32+02:00",
+    "exported_at": "2023-09-17T22:44:20+02:00",
     "name": "vps",
     "author": "dxomg129@protonmail.com",
     "description": "vps",
@@ -16,14 +16,14 @@
     "startup": "bash PteroVM.sh",
     "config": {
         "files": "{}",
-        "startup": "{}",
+        "startup": "{\r\n    \"done\": \"-----> VPS HAS STARTED <----\"\r\n}",
         "logs": "{}",
         "stop": "exit"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\ncd \/mnt\/server\r\ncurl -O https:\/\/raw.githubusercontent.com\/dxomg\/vpsfreepterovm\/main\/PteroVM.sh",
-            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "script": "#!\/bin\/bash\r\ncd \/mnt\/server\r\n\r\nrm * -rf # Remove all inside container\r\n\r\nrm .installed -rf # Remove .installed\r\n\r\napt update\r\napt install -y curl\r\n\r\nurl=\"https:\/\/raw.githubusercontent.com\/dxomg\/vpsfreepterovm\/main\/PteroVM.sh\"\r\nmax_retries=10\r\ntimeout=5\r\nretry_interval=1\r\n\r\nfor ((i=1; i<=$max_retries; i++)); do\r\n    curl -m $timeout -O $url && break || (\r\n        echo \"Retry in $retry_interval seconds...\"\r\n        sleep $retry_interval\r\n    )\r\ndone",
+            "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
     },
