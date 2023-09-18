@@ -183,9 +183,26 @@ display_footer
 ###########################
 # Start PRoot environment #
 ###########################
+# Option to set a password
+echo
+echo "Do you want to set a password for your VM? (type y)"
+read choice
+
+if [ "$choice" = "y" ]; then
+    if [ ! -e $ROOTFS_DIR/.password_set ]; then
+        echo "Enter password for the VM:"
+        read vm_password
+        echo "root:$vm_password" | $ROOTFS_DIR/usr/local/bin/proot --rootfs="$ROOTFS_DIR" -w "/root" -b /dev -b /sys -b /proc -b /etc/resolv.conf chpasswd
+        echo "Password set successfully for the root user."
+        touch $ROOTFS_DIR/.password_set
+    else
+        echo "Password has already been set for the VM."
+    fi
+fi
 
 # This command starts PRoot and binds several important directories
 # from the host file system to our special root file system.
 $ROOTFS_DIR/usr/local/bin/proot \
 --rootfs="${ROOTFS_DIR}" \
 -0 -w "/root" -b /dev -b /sys -b /proc -b /etc/resolv.conf --kill-on-exit
+
