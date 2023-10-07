@@ -4,16 +4,16 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-09-17T22:44:20+02:00",
+    "exported_at": "2023-10-07T21:14:22+02:00",
     "name": "vps",
     "author": "dxomg129@protonmail.com",
     "description": "vps",
     "features": null,
     "docker_images": {
-        "ghcr.io\/pterodactyl\/yolks:debian": "ghcr.io\/pterodactyl\/yolks:debian"
+        "ghcr.io\/pterodactyl\/yolks:alpine": "ghcr.io\/pterodactyl\/yolks:alpine"
     },
     "file_denylist": [],
-    "startup": "bash PteroVM.sh",
+    "startup": "sh PteroVM.sh",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"-----> VPS HAS STARTED <----\"\r\n}",
@@ -22,9 +22,9 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\ncd \/mnt\/server\r\n\r\nrm * -rf # Remove all inside container\r\n\r\nrm .installed -rf # Remove .installed\r\n\r\napt update\r\napt install -y curl\r\n\r\nurl=\"https:\/\/raw.githubusercontent.com\/dxomg\/vpsfreepterovm\/main\/PteroVM.sh\"\r\nmax_retries=10\r\ntimeout=5\r\nretry_interval=1\r\n\r\nfor ((i=1; i<=$max_retries; i++)); do\r\n    curl -m $timeout -O $url && break || (\r\n        echo \"Retry in $retry_interval seconds...\"\r\n        sleep $retry_interval\r\n    )\r\ndone",
-            "container": "debian:buster-slim",
-            "entrypoint": "bash"
+            "script": "#!\/bin\/sh\r\ncd \/mnt\/server\r\n\r\n# Remove all files and directories inside the container\r\nrm -rf *\r\n\r\n# Remove .installed\r\nrm -rf .installed\r\n\r\napk update\r\napk add curl\r\n\r\nurl=\"https:\/\/raw.githubusercontent.com\/dxomg\/vpsfreepterovm\/main\/PteroVM.sh\"\r\nmax_retries=10\r\ntimeout=5\r\nretry_interval=1\r\n\r\ni=1\r\nwhile [ $i -le $max_retries ]; do\r\n    curl -m $timeout -O $url && break || (\r\n        echo \"Retry in $retry_interval seconds...\"\r\n        sleep $retry_interval\r\n    )\r\n    i=$((i+1))\r\ndone",
+            "container": "alpine:latest",
+            "entrypoint": "ash"
         }
     },
     "variables": []
