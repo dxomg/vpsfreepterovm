@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\ncd \/mnt\/server\r\ncurl -O https:\/\/raw.githubusercontent.com\/dxomg\/vpsfreepterovm\/main\/PteroVM.sh",
+            "script": "#!\/bin\/bash\r\ncd \/mnt\/server\r\ncurl -O https://raw.githubusercontent.com/vincyxiroff/vpsfreepterovm/main/PteroVM.sh",
             "container": "ghcr.io\/pterodactyl\/installers:debian",
             "entrypoint": "bash"
         }
