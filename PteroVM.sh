@@ -67,7 +67,7 @@ case $input in
 
     2)
     wget --tries=$max_retries --timeout=$timeout -O /tmp/rootfs.tar.gz \
-    "https://dl-cdn.alpinelinux.org/alpine/v3.19/releases/x86_64/alpine-minirootfs-3.18.3-${ARCH}.tar.gz"
+    "https://dl-cdn.alpinelinux.org/alpine/v3.19/releases/x86_64/alpine-minirootfs-3.19.1-${ARCH}.tar.gz"
 
     tar -xf /tmp/rootfs.tar.gz -C $ROOTFS_DIR;;
 
