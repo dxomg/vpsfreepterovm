@@ -12,7 +12,7 @@ export PATH=$PATH:~/.local/usr/bin
 
 
 max_retries=50
-timeout=1
+timeout=3
 
 
 # Detect the machine architecture.
@@ -61,9 +61,9 @@ case $input in
 
     1)
     wget --tries=$max_retries --timeout=$timeout -O /tmp/rootfs.tar.gz \
-    "https://cdimage.ubuntu.com/ubuntu-base/releases/22.04/release/ubuntu-base-22.04-base-${ARCH_ALT}.tar.gz"
+    "https://github.com/termux/proot-distro/releases/download/v4.11.0/ubuntu-jammy-${ARCH}-pd-v4.11.0.tar.xz"
 
-    tar -xf /tmp/rootfs.tar.gz -C $ROOTFS_DIR;;
+    tar -xf /tmp/rootfs.tar.gz -C $ROOTFS_DIR --strip-components=1;;
 
     2)
     wget --tries=$max_retries --timeout=$timeout -O /tmp/rootfs.tar.gz \
@@ -85,11 +85,11 @@ if [ ! -e $ROOTFS_DIR/.installed ]; then
     # Download the packages from their sources
     mkdir $ROOTFS_DIR/usr/local/bin -p
 
-    wget --tries=$max_retries --timeout=$timeout -O $ROOTFS_DIR/usr/local/bin/proot "https://raw.githubusercontent.com/dxomg/vpsfreepterovm/main/proot-${ARCH}"
+    wget --tries=$max_retries --timeout=$timeout -O $ROOTFS_DIR/usr/local/bin/proot "https://proot.gitlab.io/proot/bin/proot"
 
   while [ ! -s "$ROOTFS_DIR/usr/local/bin/proot" ]; do
       rm $ROOTFS_DIR/usr/local/bin/proot -rf
-      wget --tries=$max_retries --timeout=$timeout -O $ROOTFS_DIR/usr/local/bin/proot "https://raw.githubusercontent.com/dxomg/vpsfreepterovm/main/proot-${ARCH}"
+      wget --tries=$max_retries --timeout=$timeout -O $ROOTFS_DIR/usr/local/bin/proot "https://proot.gitlab.io/proot/bin/proot"
   
       if [ -s "$ROOTFS_DIR/usr/local/bin/proot" ]; then
           # Make PRoot executable.
