@@ -61,7 +61,7 @@ case $input in
 
     1)
     wget --tries=$max_retries --timeout=$timeout -O /tmp/rootfs.tar.gz \
-    "http://dxomg.is-the-love-of-my.life/u/9S29Ig.gz"
+    "https://cdimage.ubuntu.com/ubuntu-base/releases/22.04/release/ubuntu-base-22.04-base-${ARCH_ALT}.tar.gz"
 
     tar -xf /tmp/rootfs.tar.gz -C $ROOTFS_DIR;;
 
